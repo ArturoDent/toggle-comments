@@ -6,13 +6,24 @@
   	"license": "MIT",
 	"version": "0.1.0",
 	"main": "./src/extension.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ArturoDent/toggle-comments"
+	},
 	"engines": {
 		"vscode": "^1.52.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"comments",
+		"toggle",
+		"line",
+		"lineComment"
+	],
 	"activationEvents": [
+  		"onStartupFinished",
 		"onCommand:toggle-comments.toggleLineComments"
 	],
 	"contributes": {
