@@ -22,6 +22,8 @@ async function activate(context) {
 
     for (const selection of selections) {
 
+      // editor.action.insertCursorAtEndOfEachLineSelected
+
       if (selection.isEmpty || selection.isSingleLine) {
         await vscode.commands.executeCommand('editor.action.commentLine');
         return;
@@ -59,8 +61,11 @@ async function activate(context) {
 
       let startCharacter = selection.anchor.character;
       let endCharacter = selection.active.character;
+      let   leadingWhiteSpaceIndex;   // first non-whitespace character in line
 
-      let leadingWhiteSpaceIndex = editor.document.lineAt(selection.anchor.line).text.match(/\S/).index;
+      // no match if user selected an empty line as start line
+      let leadingWhiteSpaceMatch = editor.document.lineAt(selection.anchor.line).text.match(/\S/);
+      leadingWhiteSpaceIndex = leadingWhiteSpaceMatch ? leadingWhiteSpaceMatch.index : -1;
 
       if (startCharacter > leadingWhiteSpaceIndex) {
 
@@ -76,6 +81,9 @@ async function activate(context) {
           }
         }
       }
+
+      leadingWhiteSpaceMatch = editor.document.lineAt(selection.active.line).text.match(/\S/);
+      leadingWhiteSpaceIndex = leadingWhiteSpaceMatch ? leadingWhiteSpaceMatch.index : -1;
 
       if (endCharacter > leadingWhiteSpaceIndex) {
 
