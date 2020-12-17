@@ -1,17 +1,17 @@
 {
 	"name": "toggle-comments",
 	"displayName": "Toggle Comments",
-  	"publisher": "ArturoDent",
+  "publisher": "ArturoDent",
 	"description": "Toggle comments line-by-line in a selection(s)",
-  	"license": "MIT",
-	"version": "0.2.5",
+  "license": "MIT",
+	"version": "0.2.7",
 	"main": "./src/extension.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/ArturoDent/toggle-comments"
 	},
 	"engines": {
-		"vscode": "^1.52.0"
+		"vscode": "^1.52.1"
 	},
 	"categories": [
 		"Other"
@@ -23,7 +23,7 @@
 		"lineComment"
 	],
 	"activationEvents": [
-  		"onStartupFinished",
+  	"onStartupFinished",
 		"onCommand:toggle-comments.toggleLineComments"
 	],
 	"contributes": {

@@ -4,10 +4,7 @@ const languageConfigs = require('./languageConfig');
 /**
  * @param {vscode.ExtensionContext} context
  */
-async function activate(context) {
-
-  // // const lineCommentString = languageConfigs.get('comments').lineComment;  // works
-  // const lineCommentString = languageConfigs.get('comments.lineComment');     // works!
+function activate(context) {
 
 	let disposable = vscode.commands.registerCommand('toggle-comments.toggleLineComments', async function () {
 
@@ -21,8 +18,6 @@ async function activate(context) {
     let selections = editor.selections;
 
     for (const selection of selections) {
-
-      // editor.action.insertCursorAtEndOfEachLineSelected
 
       if (selection.isEmpty || selection.isSingleLine) {
         await vscode.commands.executeCommand('editor.action.commentLine');
