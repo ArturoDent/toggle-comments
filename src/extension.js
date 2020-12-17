@@ -33,7 +33,7 @@ async function activate(context) {
       let range = editor.document.lineAt(start).range;
       editor.selection =  new vscode.Selection(range.start, range.end);  // move cursor to the start line of selection
     
-      // from start line of selction to end line of selection
+      // from start line of selection to end line of selection
       for (let line = start; line < numLines + start; line++) {
     
         // move cursor to next line, but don't move first time
@@ -43,6 +43,7 @@ async function activate(context) {
         // vscode skips empty lines
         if (editor.document.lineAt(line).isEmptyOrWhitespace) continue;
 
+        // some settings have a space automatically added after comment characters (check that setting?)
         if (!lengthCommentCharacters) {
           let compareText = editor.document.lineAt(line).text;
           await vscode.commands.executeCommand('editor.action.commentLine');
@@ -59,26 +60,35 @@ async function activate(context) {
       let startCharacter = selection.anchor.character;
       let endCharacter = selection.active.character;
 
-      if (!editor.document.lineAt(selection.anchor.line).isEmptyOrWhitespace) {
+      let leadingWhiteSpaceIndex = editor.document.lineAt(selection.anchor.line).text.match(/\S/).index;
 
-        if (editor.document.lineAt(selection.anchor.line).text.startsWith(lineCommentString)) {
-          // some settings have a space automatically added after comment characters (check that setting?)
-          startCharacter += lengthCommentCharacters;
-        }
-        else {
-          startCharacter -= lengthCommentCharacters;
-          startCharacter = (startCharacter >= 0) ? startCharacter : 0;
+      if (startCharacter > leadingWhiteSpaceIndex) {
+
+        if (!editor.document.lineAt(selection.anchor.line).isEmptyOrWhitespace) {
+
+          // trimStart() remove whitespace from indented lines
+          if (editor.document.lineAt(selection.anchor.line).text.trimStart().startsWith(lineCommentString)) {
+            startCharacter += lengthCommentCharacters;
+          }
+          else {
+            startCharacter -= lengthCommentCharacters;
+            startCharacter = (startCharacter >= 0) ? startCharacter : 0;  // no negative values
+          }
         }
       }
 
-      if (!editor.document.lineAt(selection.active.line).isEmptyOrWhitespace) {
+      if (endCharacter > leadingWhiteSpaceIndex) {
 
-        if (editor.document.lineAt(selection.active.line).text.startsWith(lineCommentString)) {
-          endCharacter += lengthCommentCharacters;
-        }
-        else {
-          endCharacter -= lengthCommentCharacters;
-          endCharacter = (endCharacter >=0 ) ? endCharacter : 0;
+        if (!editor.document.lineAt(selection.active.line).isEmptyOrWhitespace) {
+
+          // trimStart() remove whitespace from indented lines
+          if (editor.document.lineAt(selection.active.line).text.trimStart().startsWith(lineCommentString)) {
+            endCharacter += lengthCommentCharacters;
+          }
+          else {
+            endCharacter -= lengthCommentCharacters;
+            endCharacter = (endCharacter >=0 ) ? endCharacter : 0;
+          }
         }
       }
       resetSelections[index] = new vscode.Selection(selection.anchor.line, startCharacter, selection.active.line, endCharacter);
