@@ -98,6 +98,8 @@ That will respected by this extension, but it makes the calculation on where to 
 
 ## Release Notes
 
-* 0.1.0 - Initial Release
+* 0.1.0 - Initial Release  
+* 0.2.0 - fixed start/emd of selection in leading whitespace 
+* 0.2.5 - fixed null matches on empty lines   
 
 -----------------------------------------------------------------------------------------------------------
