@@ -1,9 +1,9 @@
 {
 	"name": "toggle-comments",
-	"displayName": "Toggle Comments",
-  "publisher": "ArturoDent",
+	"displayName": "Toggle Line Comments",
+  	"publisher": "ArturoDent",
 	"description": "Toggle comments line-by-line in a selection(s)",
-  "license": "MIT",
+  	"license": "MIT",
 	"version": "0.2.7",
 	"main": "./src/extension.js",
 	"repository": {
