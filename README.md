@@ -29,7 +29,7 @@ As you can see, the line comment in the middle line is not toggled off - another
 
 ## Requirements
 
-The default keybinding does require that there be a selection or multiple selections in the editor and that the editor be focused.  You can run the command from the `Command Palette` without a selection or on an empty line in which case this extension will simply run vscode's built-in toggle line comment command which will give the expected result.  The label for the command which will appear in the `Command Palette` is &nbsp; **"Toggle Line Comments By Line in a Selection"**.
+You can run the command from the `Command Palette` without a selection or on an empty line in which case this extension will simply run vscode's built-in toggle line comment command which will give the expected result.  The label for the command which will appear in the `Command Palette` is &nbsp; **"Toggle Line Comments By Line in a Selection"**.
 
 ---------
 
@@ -63,7 +63,7 @@ This extension contributes the following default keybinding:
 	"command": "toggle-comments.toggleLineComments",
 	"key": "ctrl+alt+/",                  // these are the default keybindings 
 	"mac": "cmd+alt+/",
-	"when": "editorTextFocus && editorHasSelection"
+	"when": "editorTextFocus"
 }
 ```
 <kbd>Ctrl/Cmd</kbd>+<kbd>Alt</kbd>+<kbd>/</kbd> is the default keybinding, but you can change that to whatever you wish.
@@ -100,6 +100,7 @@ That will respected by this extension, but it makes the calculation on where to 
 
 * 0.1.0 - Initial Release  
 * 0.2.0 - fixed start/emd of selection in leading whitespace 
-* 0.2.5 - fixed null matches on empty lines   
+* 0.2.5 - fixed null matches on empty lines 
+* 0.3.0 - removed `editorHasSelection` from default keybinding   
 
 -----------------------------------------------------------------------------------------------------------

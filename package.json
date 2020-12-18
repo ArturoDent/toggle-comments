@@ -4,7 +4,7 @@
   	"publisher": "ArturoDent",
 	"description": "Toggle comments line-by-line in a selection(s)",
   	"license": "MIT",
-	"version": "0.2.7",
+	"version": "0.3.0",
 	"main": "./src/extension.js",
 	"repository": {
 		"type": "git",
@@ -38,7 +38,7 @@
 				"command": "toggle-comments.toggleLineComments",
 				"key": "ctrl+alt+/",
 				"mac": "cmd+alt+/",
-				"when": "editorTextFocus && editorHasSelection"
+				"when": "editorTextFocus"
 			}
 		]
 	},
