@@ -63,10 +63,21 @@ This extension contributes the following default keybinding:
 	"command": "toggle-comments.toggleLineComments",
 	"key": "ctrl+alt+/",                  // these are the default keybindings 
 	"mac": "cmd+alt+/",
-	"when": "editorTextFocus"
+	"when": "editorTextFocus && !editorReadonly"
 }
 ```
-<kbd>Ctrl/Cmd</kbd>+<kbd>Alt</kbd>+<kbd>/</kbd> is the default keybinding, but you can change that to whatever you wish.
+<kbd>Ctrl or Cmd</kbd>+<kbd>Alt</kbd>+<kbd>/</kbd> is the default keybinding, but you can change that to whatever you wish.
+
+* If you never want the built-in behaviour of `Toggle Line Comment` <kbd>Ctrl or Cmd</kbd>+<kbd>/</kbd>, you could just set this extension's  command keybinding to:
+
+```jsonc
+{
+	"command": "toggle-comments.toggleLineComments",
+	"key": "ctrl+/",                  // override the built-in default 'Toggle Line Comment' 
+	"mac": "cmd+/",
+	"when": "editorTextFocus && !editorReadonly"
+}
+```
 
 -----------
 
@@ -74,7 +85,7 @@ This extension contributes the following default keybinding:
 
 This extension only works on line comments, not block comments.
 
-Many people may have their environment set up to append to the block comment characters one space, so that
+Many people may have their environment set up to append to the block comment characters one space via the setting `"editor.comments.insertSpace"` (default is enabled), so that
 
 ```javascript
 const a = 12;
@@ -92,7 +103,7 @@ rather than
 //const a = 12;  - no space after //
 ```
 
-That will respected by this extension, but it makes the calculation on where to reset the selection boundaries tricky, as it could change user to user and/or by languageId.  I personally don't use the pre-existing selection boundaries for anything but signalling the lines to be toggled, so it may not be an issue for you either.  But let me know if the selection boundaries are not reset to exactly where they were before. See the second demo above.
+That will respected by this extension, let me know if the selection boundaries are not reset to exactly where they were before. See the second demo above.
 
 -----------
 
@@ -101,6 +112,7 @@ That will respected by this extension, but it makes the calculation on where to 
 * 0.1.0 - Initial Release  
 * 0.2.0 - fixed start/emd of selection in leading whitespace 
 * 0.2.5 - fixed null matches on empty lines 
-* 0.3.0 - removed `editorHasSelection` from default keybinding   
+* 0.3.0 - removed `editorHasSelection` from default keybinding  
+* 0.3.5 - simplified checking setting for `"editor.comments.insertSpace"`  
 
 -----------------------------------------------------------------------------------------------------------
