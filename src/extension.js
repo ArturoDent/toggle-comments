@@ -10,11 +10,13 @@ function activate(context) {
 
     // const lineCommentString = languageConfigs.get('comments').lineComment;  // works
     const lineCommentString = languageConfigs.get('comments.lineComment');     // also works!
+    let lengthCommentCharacters = lineCommentString.length;
 
-    let lengthCommentCharacters;
+    // "editor.comments.insertSpace": false/true/undefined if no setting (default is true)
+    const commentSpaceSetting = await vscode.workspace.getConfiguration().get('editor.comments.insertSpace');
+    if (commentSpaceSetting || commentSpaceSetting === undefined) lengthCommentCharacters += 1
 
     let editor = vscode.window.activeTextEditor;
-    // let selection = editor.selection;
     let selections = editor.selections;
 
     for (const selection of selections) {
@@ -40,13 +42,7 @@ function activate(context) {
         // vscode skips empty lines
         if (editor.document.lineAt(line).isEmptyOrWhitespace) continue;
 
-        // some settings have a space automatically added after comment characters (check that setting?)
-        if (!lengthCommentCharacters) {
-          let compareText = editor.document.lineAt(line).text;
-          await vscode.commands.executeCommand('editor.action.commentLine');
-          lengthCommentCharacters = Math.abs(compareText.length - editor.document.lineAt(line).text.length);
-        }
-        else await vscode.commands.executeCommand('editor.action.commentLine');  // toggle line comment on each line
+        await vscode.commands.executeCommand('editor.action.commentLine');  // toggle line comment on each line
       }
     }
 
@@ -56,7 +52,7 @@ function activate(context) {
 
       let startCharacter = selection.anchor.character;
       let endCharacter = selection.active.character;
-      let   leadingWhiteSpaceIndex;   // first non-whitespace character in line
+      let leadingWhiteSpaceIndex;   // first non-whitespace character in line
 
       // no match if user selected an empty line as start line
       let leadingWhiteSpaceMatch = editor.document.lineAt(selection.anchor.line).text.match(/\S/);
