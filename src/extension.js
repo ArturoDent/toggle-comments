@@ -9,7 +9,11 @@ function activate(context) {
 	let disposable = vscode.commands.registerCommand('toggle-comments.toggleLineComments', async function () {
 
     // const lineCommentString = languageConfigs.get('comments').lineComment;  // works
-    const lineCommentString = languageConfigs.get('comments.lineComment');     // also works!
+    let lineCommentString = languageConfigs.get('comments.lineComment');     // also works!
+      // for languages like html that have no comments.lineComment
+    if (!lineCommentString) lineCommentString = languageConfigs.get('comments.blockComment');
+    // if still no lineCommentString, dump a notification message to user
+
     let lengthCommentCharacters = lineCommentString.length;
 
     // "editor.comments.insertSpace": false/true/undefined if no setting (default is true)

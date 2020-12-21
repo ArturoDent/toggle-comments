@@ -113,6 +113,7 @@ That will respected by this extension, let me know if the selection boundaries a
 * 0.2.0 - fixed start/emd of selection in leading whitespace 
 * 0.2.5 - fixed null matches on empty lines 
 * 0.3.0 - removed `editorHasSelection` from default keybinding  
-* 0.3.5 - simplified checking setting for `"editor.comments.insertSpace"`  
+* 0.3.5 - simplified checking setting for `"editor.comments.insertSpace"` 
+* 0.3.6 - fixed for languages with no `comment.lineComment` defined in their language configuration 
 
 -----------------------------------------------------------------------------------------------------------

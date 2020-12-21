@@ -4,7 +4,7 @@
   	"publisher": "ArturoDent",
 	"description": "Toggle comments line-by-line in a selection(s)",
   	"license": "MIT",
-	"version": "0.3.5",
+	"version": "0.3.6",
 	"main": "./src/extension.js",
 	"repository": {
 		"type": "git",
@@ -20,10 +20,10 @@
 		"comments",
 		"toggle",
 		"line",
-		"lineComment"
+		"line comment"
 	],
 	"activationEvents": [
-  	"onStartupFinished",
+  		"onStartupFinished",
 		"onCommand:toggle-comments.toggleLineComments"
 	],
 	"contributes": {
