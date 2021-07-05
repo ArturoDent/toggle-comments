@@ -31,7 +31,7 @@ As you can see, the line comment in the middle line is not toggled off - another
 
 You can run the command from the `Command Palette` without a selection or on an empty line in which case this extension will simply run vscode's built-in toggle line comment command which will give the expected result.  The label for the command which will appear in the `Command Palette` is &nbsp; **"Toggle Line Comments By Line in a Selection"**.
 
----------
+---------  
 
 ## Features
 
@@ -114,6 +114,7 @@ That will respected by this extension, let me know if the selection boundaries a
 * 0.2.5 - fixed null matches on empty lines 
 * 0.3.0 - removed `editorHasSelection` from default keybinding  
 * 0.3.5 - simplified checking setting for `"editor.comments.insertSpace"` 
-* 0.3.6 - fixed for languages with no `comment.lineComment` defined in their language configuration 
+* 0.3.6 - fixed for languages with no `comment.lineComment` defined in their language configuration  
+* 0.3.7 - hard-coded jsonc `//` since no jsonc language configuration available  
 
------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------

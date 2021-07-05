@@ -19,6 +19,8 @@ exports.get = function (config) {
   // for language of current editor
   const editor = vscode.window.activeTextEditor;
   const documentLanguageId = editor.document.languageId;
+  if (documentLanguageId === "jsonc") return "//";
+
   var langConfigFilepath = null;
 
   for (const _ext of vscode.extensions.all) {

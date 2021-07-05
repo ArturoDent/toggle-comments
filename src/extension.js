@@ -12,7 +12,7 @@ function activate(context) {
     let lineCommentString = languageConfigs.get('comments.lineComment');     // also works!
       // for languages like html that have no comments.lineComment
     if (!lineCommentString) lineCommentString = languageConfigs.get('comments.blockComment');
-    // if still no lineCommentString, dump a notification message to user
+    // if still no lineCommentString, dump a notification  to user
 
     let lengthCommentCharacters = lineCommentString.length;
 
@@ -29,16 +29,16 @@ function activate(context) {
         await vscode.commands.executeCommand('editor.action.commentLine');
         return;
       }
-    
+
       let numLines = Math.abs(selection.end.line - selection.start.line) + 1;
       let start = selection.start.line;
 
       let range = editor.document.lineAt(start).range;
       editor.selection =  new vscode.Selection(range.start, range.end);  // move cursor to the start line of selection
-    
+
       // from start line of selection to end line of selection
       for (let line = start; line < numLines + start; line++) {
-    
+
         // move cursor to next line, but don't move first time
         if (line !== start) {
           await vscode.commands.executeCommand('cursorDown');
