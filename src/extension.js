@@ -4,16 +4,21 @@ const languageConfigs = require('./languageConfig');
 /**
  * @param {vscode.ExtensionContext} context
  */
-function activate(context) {
+async function activate(context) {
 
 	let disposable = vscode.commands.registerCommand('toggle-comments.toggleLineComments', async function () {
 
-    // const lineCommentString = languageConfigs.get('comments').lineComment;  // works
-    let lineCommentString = languageConfigs.get('comments.lineComment');     // also works!
+    const documentLanguageId = vscode.window.activeTextEditor.document.languageId;
+    const comments = await languageConfigs.get(documentLanguageId, 'comments');
+    let lineCommentString;
+    
+    if (comments) {
+      lineCommentString = comments.lineComment;
       // for languages like html that have no comments.lineComment
-    if (!lineCommentString) lineCommentString = languageConfigs.get('comments.blockComment');
-    // if still no lineCommentString, dump a notification  to user
-
+      if (!lineCommentString) lineCommentString = comments.blockComment;
+    }
+    else return;  // with notificationMessage
+    
     let lengthCommentCharacters = lineCommentString.length;
 
     // "editor.comments.insertSpace": false/true/undefined if no setting (default is true)
@@ -112,3 +117,4 @@ module.exports = {
 	activate,
 	deactivate
 }
+
