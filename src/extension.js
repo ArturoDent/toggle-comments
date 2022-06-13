@@ -1,23 +1,43 @@
 const vscode = require('vscode');
-const languageConfigs = require('./languageConfig');
+const path = require('path');
+const fs = require('fs');
+const jsonc = require("jsonc-parser");
+const configs = require('./makeConfigs');
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 async function activate(context) {
+  
+  const extConfigDirectory = path.join(context.globalStorageUri.fsPath, 'comments');
+  let commentObj;
+
+  // so first run only, doesn't mean there is anything in that file though
+  if (!fs.existsSync(path.join(extConfigDirectory, `comments.json`))) {
+    commentObj = await configs.build(context, extConfigDirectory);
+  }
+  else commentObj = jsonc.parse(fs.readFileSync(path.join(extConfigDirectory, `comments.json`)).toString());
+  
+  // --------------------   toggleLineComments command  ----------------------
 
 	let disposable = vscode.commands.registerCommand('toggle-comments.toggleLineComments', async function () {
 
     const documentLanguageId = vscode.window.activeTextEditor.document.languageId;
-    const comments = await languageConfigs.get(documentLanguageId, 'comments');
-    let lineCommentString;
+    let comments;
     
+    if (!commentObj || !commentObj[documentLanguageId]) 
+      comments = await configs.build(context, extConfigDirectory)[documentLanguageId];
+    else comments = commentObj[documentLanguageId];
+    // if still no comments, return
+    if (!comments) return;  // add notificationMessage
+    
+    let lineCommentString;
     if (comments) {
       lineCommentString = comments.lineComment;
       // for languages like html that have no comments.lineComment
       if (!lineCommentString) lineCommentString = comments.blockComment;
     }
-    else return;  // with notificationMessage
+    else return;  // add notificationMessage
     
     let lengthCommentCharacters = lineCommentString.length;
 

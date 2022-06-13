@@ -115,6 +115,7 @@ That will respected by this extension, let me know if the selection boundaries a
 * 0.3.0 - removed `editorHasSelection` from default keybinding  
 * 0.3.5 - simplified checking setting for `"editor.comments.insertSpace"` 
 * 0.3.6 - fixed for languages with no `comment.lineComment` defined in their language configuration  
-* 0.3.7 - hard-coded jsonc `//` since no jsonc language configuration available  
+* 0.3.7 - hard-coded jsonc `//` since no jsonc language configuration available    
+* 0.4.0 - added jsonc-parser to handle language config files with comments  
 
 ---------------------------------------------------------------------------------------------------

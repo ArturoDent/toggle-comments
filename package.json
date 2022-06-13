@@ -4,7 +4,7 @@
 	"publisher": "ArturoDent",
 	"description": "Toggle comments line-by-line in a selection(s)",
 	"license": "MIT",
-	"version": "0.3.8",
+	"version": "0.4.0",
 	"main": "./src/extension.js",
 	"repository": {
 		"type": "git",
