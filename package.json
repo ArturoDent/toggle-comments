@@ -1,65 +1,69 @@
 {
-	"name": "toggle-comments",
-	"displayName": "Toggle Line Comments",
-	"publisher": "ArturoDent",
-	"description": "Toggle comments line-by-line in a selection(s)",
-	"license": "MIT",
-	"version": "0.4.0",
-	"main": "./src/extension.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ArturoDent/toggle-comments"
-	},
-	"engines": {
-		"vscode": "^1.52.1"
-	},
-	"categories": [
-		"Other"
-	],
-	"keywords": [
-		"comments",
-		"toggle",
-		"line",
-		"line comment"
-	],
-	"activationEvents": [
-		"onStartupFinished",
-		"onCommand:toggle-comments.toggleLineComments"
-	],
-	"contributes": {
-		"commands": [
-			{
-				"command": "toggle-comments.toggleLineComments",
-				"title": "Toggle Line Comments By Line in a Selection"
-			}
-		],
-		"keybindings": [
-			{
-				"command": "toggle-comments.toggleLineComments",
-				"key": "ctrl+alt+/",
-				"mac": "cmd+alt+/",
-				"linux": "ctrl+alt+/",
-				"when": "editorTextFocus && !editorReadonly"
-			}
-		]
-	},
-	"scripts": {
-		"lint": "eslint .",
-		"pretest": "npm run lint",
-		"test": "node ./test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.1.1",
-		"@types/mocha": "^7.0.2",
-		"@types/node": "^13.11.0",
-		"@types/vscode": "^1.52.0",
-		"eslint": "^6.8.0",
-		"glob": "^7.1.6",
-		"mocha": "^7.1.2",
-		"typescript": "^3.8.3",
-		"vscode-test": "^1.3.0"
-	},
-	"dependencies": {
-		"jsonc-parser": "^3.0.0"
-	}
+  "name": "toggle-comments",
+  "displayName": "Toggle Line Comments",
+  "publisher": "ArturoDent",
+  "description": "Toggle comments line-by-line in a selection(s)",
+  "license": "MIT",
+  "version": "0.4.1",
+  "main": "./src/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArturoDent/toggle-comments"
+  },
+  "engines": {
+    "vscode": "^1.52.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "comments",
+    "toggle",
+    "line",
+    "line comment"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:toggle-comments.toggleLineComments"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "toggle-comments.toggleLineComments",
+        "title": "Toggle Line Comments By Line in a Selection"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "toggle-comments.toggleLineComments",
+        "key": "ctrl+alt+/",
+        "mac": "cmd+alt+/",
+        "linux": "ctrl+alt+/",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.11.0",
+    "@types/vscode": "^1.52.0",
+    "eslint": "^6.8.0",
+    "glob": "^7.1.6",
+    "mocha": "^7.1.2",
+    "typescript": "^3.8.3",
+    "vscode-test": "^1.3.0"
+  },
+  "dependencies": {
+    "jsonc-parser": "^3.0.0"
+  }
 }
